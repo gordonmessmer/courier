@@ -35,6 +35,7 @@ jobs:
           ./configure
           make
           make install
+          make check
           make dist
 
       - name: Build courier-unicode
@@ -45,6 +46,7 @@ jobs:
           ./configure
           make
           make install
+          make check
           make dist
           echo /usr/local/lib > /etc/ld.so.conf.d/local.conf
           echo /usr/local/lib64 >> /etc/ld.so.conf.d/local.conf
@@ -58,6 +60,7 @@ jobs:
           ./configure
           make
           make install
+          make check
           make dist
 
       - name: Build ${{ matrix.project }} dist
@@ -71,7 +74,7 @@ jobs:
           make install
           # "courier" requires an additional step
           if test "${{ matrix.project }}" == courier ; then make install-configure ; fi
-          #make check
+          make check
           make dist
 
       - name: Upload dist for ${{ matrix.project }}
@@ -137,6 +140,7 @@ jobs:
           ./configure
           make
           make install
+          make check
           popd
           popd
           rm -rf build
@@ -152,6 +156,7 @@ jobs:
           ./configure
           make
           make install
+          make check
           echo /usr/local/lib > /etc/ld.so.conf.d/local.conf
           echo /usr/local/lib64 >> /etc/ld.so.conf.d/local.conf
           ldconfig
@@ -170,6 +175,7 @@ jobs:
           ./configure
           make
           make install
+          make check
           popd
           popd
           rm -rf build
@@ -187,7 +193,7 @@ jobs:
           make install
           # "courier" requires an additional step
           if test "${{ matrix.project }}" == courier ; then make install-configure ; fi
-          #make check
+          make check
           popd
           popd
           rm -rf build
